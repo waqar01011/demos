@@ -1,0 +1,15 @@
+body, canvas {
+    background-color: #323232;
+    background: -webkit-gradient(radial, center center, 0, center center, 460, from(#323232), to(#1a1a1a));
+    background: -webkit-radial-gradient(circle, #323232, #1a1a1a);
+    background: -moz-radial-gradient(circle, #323232, #1a1a1a);
+    background: -ms-radial-gradient(circle, #323232, #1a1a1a);
+    margin: 0px;
+    overflow: hidden;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+} 

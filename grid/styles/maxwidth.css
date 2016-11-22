@@ -1,0 +1,376 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/**
+ * Clearfix
+ */
+/**
+ * Establish a grid-containing element.
+ */
+/**
+ * Align an element inside a containter to the grid.
+ */
+/**
+ * Move an element to a specific column in the grid.
+ */
+* {
+  outline: none;
+}
+
+html, body {
+  background: #f5f5f5;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+article {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+article h3 {
+  width: 100%;
+  text-align: center;
+  font-family: 'Raleway', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 38px;
+  padding-top: 72px;
+  padding-bottom: 55px;
+  color: #b7b7b7;
+}
+article h3.seperator {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 60px;
+}
+header .center {
+  width: 100%;
+  padding: 0 0%;
+  box-sizing: border-box;
+  overflow: hidden;
+  *zoom: 1;
+  overflow: hidden;
+  *zoom: 1;
+  position: relative;
+  display: block;
+}
+header .center a {
+  position: absolute;
+  top: 50%;
+  margin-top: -42px;
+  display: block;
+  width: 84px;
+  height: 85px;
+}
+header .center a#example_prev {
+  left: -25px;
+}
+header .center a#example_next {
+  right: -25px;
+}
+header .center a span {
+  position: relative;
+  z-index: 8998;
+  display: block;
+  overflow: hidden;
+  text-indent: -1000px;
+  width: 84px;
+  height: 85px;
+  display: none;
+}
+header .center a i {
+  position: absolute;
+  display: block;
+  width: 13px;
+  height: 19px;
+  left: 50%;
+  top: 50%;
+  margin-top: -10px;
+  z-index: 8999;
+}
+header .center i.arrow-left {
+  margin-left: -8px;
+}
+header .center i.arrow-right {
+  margin-left: -5px;
+}
+header .center h1 {
+  float: left;
+  margin-right: -100%;
+  width: 66%;
+  margin-left: 17%;
+  text-align: center;
+  font-family: 'Raleway', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #b7b7b7;
+}
+
+@media screen and (min-width: 460px) {
+  header .center h1 {
+    font-size: 32px;
+  }
+}
+@media screen and (min-width: 720px) {
+  header .center h1 {
+    font-size: 38px;
+  }
+
+  header .center h1 {
+    font-size: 36px;
+  }
+
+  header .center a span {
+    display: block;
+  }
+  header .center a#example_prev {
+    left: 0px;
+  }
+  header .center a#example_next {
+    right: 0px;
+  }
+}
+@media screen and (min-width: 900px) {
+  header .center h1 {
+    font-size: 38px;
+  }
+}
+footer {
+  width: 100%;
+}
+
+footer .center {
+  margin: 0 auto;
+}
+
+article {
+  width: 100%;
+  padding: 0 0%;
+  box-sizing: border-box;
+  overflow: hidden;
+  *zoom: 1;
+  margin: 0 auto;
+  margin-bottom: 2%;
+  height: 80px;
+}
+
+article div {
+  height: 80px;
+  background: #fff200;
+  font-family: 'Raleway', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+  color: #454545;
+  line-height: 80px;
+}
+
+#grid {
+  margin-bottom: 0px;
+  height: 0px;
+}
+#grid div {
+  background: none;
+}
+#grid div div {
+  background: black;
+}
+
+/* Helper Class: Container */
+.row {
+  width: 100%;
+  padding: 0 0%;
+  box-sizing: border-box;
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/* Helper Class: Columns */
+.col1 {
+  float: left;
+  margin-right: -100%;
+  width: 6.5%;
+}
+
+.col2 {
+  float: left;
+  margin-right: -100%;
+  width: 15%;
+}
+
+.col3 {
+  float: left;
+  margin-right: -100%;
+  width: 23.5%;
+}
+
+.col4 {
+  float: left;
+  margin-right: -100%;
+  width: 32%;
+}
+
+.col5 {
+  float: left;
+  margin-right: -100%;
+  width: 40.5%;
+}
+
+.col6 {
+  float: left;
+  margin-right: -100%;
+  width: 49%;
+}
+
+.col7 {
+  float: left;
+  margin-right: -100%;
+  width: 57.5%;
+}
+
+.col8 {
+  float: left;
+  margin-right: -100%;
+  width: 66%;
+}
+
+.col9 {
+  float: left;
+  margin-right: -100%;
+  width: 74.5%;
+}
+
+.col10 {
+  float: left;
+  margin-right: -100%;
+  width: 83%;
+}
+
+.col11 {
+  float: left;
+  margin-right: -100%;
+  width: 91.5%;
+}
+
+.col12 {
+  float: left;
+  margin-right: -100%;
+  width: 100%;
+}
+
+/* Helper Class: Horizontal Position */
+.push0 {
+  margin-left: 0%;
+}
+
+.push1 {
+  margin-left: 8.5%;
+}
+
+.push2 {
+  margin-left: 17%;
+}
+
+.push3 {
+  margin-left: 25.5%;
+}
+
+.push4 {
+  margin-left: 34%;
+}
+
+.push5 {
+  margin-left: 42.5%;
+}
+
+.push6 {
+  margin-left: 51%;
+}
+
+.push7 {
+  margin-left: 59.5%;
+}
+
+.push8 {
+  margin-left: 68%;
+}
+
+.push9 {
+  margin-left: 76.5%;
+}
+
+.push10 {
+  margin-left: 85%;
+}
+
+.push11 {
+  margin-left: 93.5%;
+}
