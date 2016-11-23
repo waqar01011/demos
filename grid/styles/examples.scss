@@ -1,0 +1,630 @@
+@import 'compass';
+@import 'compass/reset';
+@import 'compass/css3';
+
+@import 'grid/grid';
+
+@import 'ui/all';
+
+$color_yellow: #fff200;
+$color_body: #2b2b2b;
+
+
+// ---------------------------------------
+// General Demo Appearance
+// ---------------------------------------
+
+body {
+	background: $color_body;
+	padding-bottom: 100px;	
+}
+
+article {
+	height: 80px;
+	float: none;
+	@include clearfix();
+	clear: both;
+
+	div {
+		background: $color_yellow;
+		height: 80px;
+		line-height: 80px;
+		text-align: center;
+		font-family: $fontMain;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        font-size: 16px;
+        color: black;
+	}
+
+}
+
+
+// ---------------------------------------
+// Example 1: Fixed Grid 
+// ---------------------------------------
+
+body.fixed {
+	
+	// ------------------------------------
+	// grid config
+	// ------------------------------------
+	$total_width: 960px !global;
+	$container_margin: 10px !global;
+	$gutter_width: 20px !global;
+	$max_width: 960px !global;
+
+	header {
+		width: $total_width;
+		max-width: $max_width;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	article{
+		width: $total_width;
+		max-width: $max_width;
+		margin: 0 auto $gutter_width auto;	
+	}
+
+	@include generate_helper_classes();
+
+	#row1{
+		div{@include column(1);}
+		@include generate_grid_positions(div, 1);
+	}
+
+	#row2{
+		div{@include column(2);}
+		@include generate_grid_positions(div, 2);
+	}
+
+	#row3{
+		div{@include column(3);}
+		@include generate_grid_positions(div, 3);
+	}
+
+	#row4{
+		div{@include column(4);}
+		@include generate_grid_positions(div, 4);
+	}
+
+
+
+}	
+
+
+// ---------------------------------------
+// Example 2: Responsive Fixed Grid 
+// ---------------------------------------
+
+@media screen and (max-width: 719px) {
+	body.fixedresponsive {
+		
+		$total_width: 320px !global;
+		$container_margin: 10px !global;
+		$gutter_width: 20px !global;
+
+		header {
+			width: $total_width;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		article{
+			width: $total_width;
+			max-width: $max_width;
+			margin: 0 auto $gutter_width auto;	
+		}
+
+		@include generate_helper_classes();
+	}	
+}
+
+
+@media screen and (min-width: 720px) {
+	body.fixedresponsive {
+		
+		$total_width: 720px !global;
+		$container_margin: 10px !global;
+		$gutter_width: 20px !global;
+
+		header {
+			width: $total_width;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		article{
+			width: $total_width;
+			max-width: $max_width;
+			margin: 0 auto $gutter_width auto;	
+		}
+
+		@include generate_helper_classes();
+	}	
+}
+
+
+@media screen and (min-width: 960px) {
+	body.fixedresponsive {
+		
+		$total_width: 960px !global;
+		$container_margin: 10px !global;
+		$gutter_width: 20px !global;
+
+		header {
+			width: $total_width;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		article{
+			width: $total_width;
+			max-width: $max_width;
+			margin: 0 auto $gutter_width auto;	
+		}
+
+		@include generate_helper_classes();
+	}	
+}
+
+
+// ---------------------------------------
+// Example 3: Fluid Grid 
+// ---------------------------------------
+
+body.fluid {
+
+	$total_width: 100% !global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 100% !global;
+
+	header {
+		@include container();
+		#prev {
+			left: $container_margin;
+		}
+		#next {
+			right: $container_margin;
+		}
+	}
+
+	article{
+		@include container();
+		margin-bottom: $gutter_width;
+		height: 80px;
+	}
+
+	@include generate_helper_classes();
+}
+
+
+// ---------------------------------------
+// Example 4: Fluid Grid with Max Width
+// ---------------------------------------
+
+body.fluidmaxwidth {
+	$total_width: 100%!global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 960px !global;
+
+	header {
+		max-width: $max_width;
+		margin-left: auto;
+		margin-right: auto;
+
+		@include container();
+
+		#prev {
+			left: $container_margin;
+		}
+		#next {
+			right: $container_margin;
+		}
+	}
+
+	article{
+		@include container();
+		max-width: $max_width;
+		margin: 0 auto;
+		margin-bottom: $gutter_width;
+		height: 80px;
+	}
+
+	@include generate_helper_classes();
+}
+
+
+// ---------------------------------------
+// Example 5: Responsive Fluid Grid 
+// ---------------------------------------
+
+body.fluidresponsive {
+
+	$total_width: 100% !global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 100% !global;
+
+	header {
+		@include container();
+		#prev {
+			left: $container_margin;
+		}
+		#next {
+			right: $container_margin;
+		}
+	}
+
+	article{
+		@include container();
+		overflow: visible;
+		margin-bottom: $gutter_width;
+		height: 80px;
+	}
+
+	#row1, #row2, #row3, #row4, #row5, #row6{
+		div{ @include column(12); }
+		@include generate_grid_positions(div, 12);
+	}
+}
+
+@media screen and (min-width: 720px) {
+	body.fluidresponsive {
+		$total_width: 100% !global;
+		$container_margin: 3% !global;
+		$gutter_width: 2% !global;
+
+		article{
+			@include container();
+			@include clearfix();
+			overflow: visible;
+		}
+
+		#row1{
+			div{@include column(2);}
+			@include generate_grid_positions(div, 2);
+		}
+		#row2{
+			div{@include column(2);}
+			@include generate_grid_positions(div, 2);
+		}
+		#row3{
+			div{@include column(4);}
+			@include generate_grid_positions(div, 4);
+			div.last{@include column(12);};
+		}
+		#row4{
+			div{@include column(4);}
+			@include generate_grid_positions(div, 4);
+		}
+		#row5{
+			div{@include column(6);}
+			@include generate_grid_positions(div, 6);
+		}
+		#row6{
+			div{@include column(12);}
+		}
+	}
+}
+
+@media all and (min-width: 1024px) {
+	body.fluidresponsive {
+
+		$total_width: 100% !global;
+		$container_margin: 3% !global;
+		$gutter_width: 2% !global;
+		$max_width: 2000px !global;
+
+		article{
+			@include container();
+			@include clearfix();
+			overflow: visible;
+		}
+
+		#row1{
+			div{@include column(1);}
+			@include generate_grid_positions(div, 1);
+		}
+		#row2{
+			div{@include column(2);}
+			@include generate_grid_positions(div, 2);
+		}
+		#row3{
+			div{@include column(3);}
+			div.last{@include column(3);}
+			@include generate_grid_positions(div, 3);
+		}
+		#row4{
+			div{@include column(4);}
+			@include generate_grid_positions(div, 4);
+		}
+		#row5{
+			div{@include column(6);}
+			@include generate_grid_positions(div, 6);
+		}
+		#row6{
+			div{@include column(12);}
+		}
+	}
+}
+
+
+// ---------------------------------------
+// Example 6: Multiple
+// ---------------------------------------
+
+
+// Example 6 : RESPONSIVE GRID
+body.multiple {
+	
+	$total_width: 320px !global;
+	$container_margin: auto !global;
+	$gutter_width: 10px !global;
+	$max_width: 100% !global;
+
+	.grid1{
+		@include container();
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 10px;
+	}
+	
+	header {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		#prev {
+			left: 3%;
+		}
+
+		#next {
+			right: 3%;
+		}
+	}
+	@include generate_helper_classes();	
+
+}
+
+@media screen and (min-width: 720px) {
+	body.multiple {
+		
+		$total_width: 720px !global;
+		$container_margin: auto !global;
+		$gutter_width: 10px !global;
+		$max_width: 100% !global;
+
+		.grid1{
+			@include container();
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 10px;
+		}
+		
+		@include generate_helper_classes();	
+
+	}
+}
+
+@media screen and (min-width: 960px) {
+	body.multiple {
+		
+		$total_width: 960px !global;
+		$container_margin: auto !global;
+		$gutter_width: 10px !global;
+		$max_width: 100% !global;
+
+		.grid1{
+			@include container();
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 10px;
+		}
+		
+		@include generate_helper_classes();	
+
+	}
+}
+
+
+// Example 6 : FLUID GRID
+
+body.multiple {
+	
+	$total_width: 100% !global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 100% !global;
+
+	.grid2{
+		margin: 0;
+		@include container();
+		@include clearfix();
+		@include generate_helper_classes();
+		max-width: $max_width;
+		margin-bottom: 10px;
+	}
+}
+
+
+// ---------------------------------------
+// Example 7: Nested
+// ---------------------------------------
+
+body.nested {
+	
+	$total_width: 100% !global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 100% !global;
+
+	header {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		#prev {
+			left: 3%;
+		}
+
+		#next {
+			right: 3%;
+		}
+	}
+
+	article {
+		@include container();
+		margin-bottom: 20px;
+		@include container();
+		@include clearfix();
+		overflow: visible;
+
+		div {
+			height: auto;
+			min-height: 80px;
+		}
+	}
+
+	@include generate_helper_classes();
+
+
+	// SUBGRID 1
+
+	$total_width: 100% !global;
+	$container_margin: 1% !global;
+	$gutter_width: 2% !global;
+
+	.subgrid1{
+		margin: 0;
+		@include container();
+		@include clearfix();
+		max-width: 2000px;
+
+		.subcol{
+			background: #ccbb27;
+			margin-bottom: 20px;
+			
+		}
+
+		.subcol1{
+			@include column(1);
+		}
+
+		.subcol6{
+			@include column(6);
+		}
+
+		@include generate_grid_positions(div, 1);
+
+		.subcol6:nth-child(1){
+			@include push(0);
+		}
+		.subcol6:nth-child(2){
+			@include push(6);
+		}
+	}
+
+	article .subgrid1:first-child{
+		margin-top: $gutter_width;
+	}
+
+
+	// SUBGRID 2
+
+	$total_width: 100% !global;
+	$container_margin: 1% !global;
+	$gutter_width: 2% !global;
+	$max_width: 2000px !global;
+
+	.subgrid2{
+		background: none !important; 
+		margin-left: 0% !important;
+
+		@include container();
+		@include clearfix();
+
+		.subsubcol {
+			background: #a2951d;
+		}
+
+		.subcol1{
+			@include column(1);
+		}
+
+		.subcol6{
+			@include column(6);
+		}
+
+		@include generate_grid_positions(div, 1);
+
+		.subcol6:nth-child(1){
+			@include push(0);
+		}
+		.subcol6:nth-child(2){
+			@include push(6);
+		}
+	}
+
+	article .subgrid2:first-child{
+		margin-top: $gutter_width;
+	}
+
+	@media screen and (max-width: 960px) {
+		.subgrid2{
+			font-size: 12px !important;
+		}
+	}
+
+	@media screen and (max-width: 600px) {
+		.subgrid2{
+			font-size: 0px !important;
+		}
+		.subgrid1{
+			font-size: 12px !important;
+		}
+	}
+	@media screen and (max-width: 400px) {
+		.subgrid1, .subgrid2{
+			font-size: 0px !important;
+		}
+	}
+
+}
+
+// ---------------------------------------
+// Example 8: Push/Pull & Source Ordering
+// ---------------------------------------
+
+body.pushpull {
+	$total_width: 100% !global;
+	$container_margin: 3% !global;
+	$gutter_width: 2% !global;
+	$max_width: 100% !global;
+
+	header {
+		max-width: $max_width;
+		margin-left: auto;
+		margin-right: auto;
+
+		@include container();
+
+		#prev {
+			left: $container_margin;
+		}
+		#next {
+			right: $container_margin;
+		}
+	}
+
+	article{
+		@include container();
+		max-width: $max_width;
+		margin: 0 auto;
+		margin-bottom: $gutter_width;
+		height: 80px;
+	}
+	
+	@include generate_helper_classes()
+}

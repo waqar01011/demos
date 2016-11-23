@@ -9,6 +9,8 @@
 
      <style>
 
+        @import url("https://fonts.googleapis.com/css?family=Roboto:400");
+
         html{
             background: #e4e4e4;
             padding: 0px;
@@ -67,6 +69,63 @@
         canvas {
             background: #000000;
         }
+
+        .description {
+            position: absolute;
+            bottom: 0;
+            height: 80px;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            z-index: 9001;
+            line-height: 80px;
+        }
+        .description p {
+            margin: 0;
+            padding: 0 0 0 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+            color: white;
+            line-height: 80px;
+            width: auto;
+            display: inline-block;
+        }
+        .description a {
+            float: right;
+            display: inline-block;
+            margin: 0;
+            margin-right: 20px;
+            margin-top: 18px;
+            border: 2px solid white;
+            padding: 0 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+            color: white;
+            line-height: 40px;
+            height: 40px;
+            text-decoration: none;
+        }
+        .description a:hover {
+            border-color: white;
+            background: white;
+            color: black;
+        }
+        @media screen and (max-width: 650px) {
+            .description {
+                text-align: center;
+            }
+            .description p {
+                display: none;
+            }
+            .description a {
+                float: none;
+                margin: 0;
+            }
+        }
     
     </style>
 
@@ -74,6 +133,11 @@
 
 
 <body>
+
+    <div class="description">
+        <p>Match up positions to hit the right tones.</p>
+        <a href="//github.com/artofrawr/demos/tree/master/karaoke" target="_blank">Source on GitHub</a>
+    </div>
 
     <div class="loader"></div>
 

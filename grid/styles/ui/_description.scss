@@ -1,28 +1,6 @@
-body, canvas {
-    background-color: #323232;
-    background: -webkit-gradient(radial, center center, 0, center center, 460, from(#323232), to(#1a1a1a));
-    background: -webkit-radial-gradient(circle, #323232, #1a1a1a);
-    background: -moz-radial-gradient(circle, #323232, #1a1a1a);
-    background: -ms-radial-gradient(circle, #323232, #1a1a1a);
-    margin: 0px;
-    overflow: hidden;
-}
-
-canvas {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 69;
-} 
-
-
-
-@import url('https://fonts.googleapis.com/css?family=Roboto:400');
-$fontMain: 'Roboto', sans-serif;
-
 .description {
     
-    position: absolute;
+    position: fixed;
     bottom: 0;
     height: 80px;
     padding: 0;
@@ -30,6 +8,7 @@ $fontMain: 'Roboto', sans-serif;
     width: 100%;
     z-index: 9001;
     line-height: 80px;       
+    background: white;
 
     p {
         margin: 0;
@@ -38,7 +17,7 @@ $fontMain: 'Roboto', sans-serif;
         font-weight: 500;
         letter-spacing: 0.01em;
         font-size: 16px;
-        color: white;
+        color: black;
         line-height: 80px;       
         width: auto;
         display: inline-block;
@@ -50,14 +29,14 @@ $fontMain: 'Roboto', sans-serif;
         margin: 0;
         margin-right: 20px;
         margin-top: 18px;
-        border: 2px solid white;
+        border: 2px solid black;
         padding: 0 20px;
 
         font-family: $fontMain;
         font-weight: 500;
         letter-spacing: 0.01em;
         font-size: 16px;
-        color: white;
+        color: black;
 
         line-height: 40px; 
         height: 40px;
@@ -67,9 +46,9 @@ $fontMain: 'Roboto', sans-serif;
     }
 
     a:hover {
-        border-color: white;
-        background: white;
-        color: black;
+        border-color: black;
+        background: black;
+        color: white;
     }
 
 

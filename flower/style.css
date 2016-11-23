@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400");
 body, canvas {
   overflow: hidden;
 }
@@ -7,4 +8,63 @@ canvas {
   top: 0px;
   left: 0px;
   background: url("bg.jpg");
+  cursor: default;
+}
+
+.description {
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  z-index: 9001;
+  line-height: 80px;
+}
+.description p {
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-size: 16px;
+  color: black;
+  line-height: 80px;
+  width: auto;
+  display: inline-block;
+}
+.description a {
+  float: right;
+  display: inline-block;
+  margin: 0;
+  margin-right: 20px;
+  margin-top: 18px;
+  border: 2px solid black;
+  padding: 0 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-size: 16px;
+  color: black;
+  line-height: 40px;
+  height: 40px;
+  text-decoration: none;
+}
+.description a:hover {
+  border-color: black;
+  background: black;
+  color: white;
+}
+
+@media screen and (max-width: 650px) {
+  .description {
+    text-align: center;
+  }
+  .description p {
+    display: none;
+  }
+  .description a {
+    float: none;
+    margin: 0;
+  }
 }

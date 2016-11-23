@@ -228,7 +228,7 @@ function Limb(x, y, angle, color) {
 }
 
 Limb.prototype.draw = function() {
-    
+
     // growing
     if (this.life <= this.maxlife) {
         var progress = (this.maxlife - this.life) / this.maxlife;
@@ -289,14 +289,12 @@ Limb.prototype.draw = function() {
 
 function Plant() {
     this.lifeSpan = 2000;
-    this.trail;
     this.speed = 0.25;
     this.points = 150;
     this.x = 0;
     this.y = 0;
     this.vector;
     this.color;
-    this.limbCount = 0;
 }
 
 Plant.prototype.onMouseDown = function() {

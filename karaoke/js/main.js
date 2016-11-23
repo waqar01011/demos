@@ -85,8 +85,7 @@ Karaoke.prototype.render = function() {
 	var progress = this.soundManager.getProgress();
 
 	if(progress >= 1){
-		this.soundManager.start();
-		progress = 0;
+		window.location.reload();
 	}
 
     this.ticks++;
