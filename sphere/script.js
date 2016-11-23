@@ -297,7 +297,7 @@ function onDragStart(e) {
     isDragging = true;
     origPosX = prevPosX = mouseX;
     origPosY = prevPosY = mouseY;
-    origTime = new Date().getTime();
+    origTime = Date.now();
 }
 
 /**
