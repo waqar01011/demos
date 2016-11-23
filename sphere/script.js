@@ -285,8 +285,14 @@ Connection.prototype.draw = function() {
  * @param {Object} e The event object.
  */
 function onDocumentMouseMove(e) {
-    mouseX = e.clientX - windowHalfX;
-    mouseY = e.clientY - windowHalfY;
+    e.preventDefault();
+    if (e.touches && e.touches.length > 0) {
+        mouseX = e.touches[0].clientX - windowHalfX;
+        mouseY = e.touches[0].clientY - windowHalfY;
+    }else {
+        mouseX = e.clientX - windowHalfX;
+        mouseY = e.clientY - windowHalfY;
+    }
 }
 
 /**
@@ -294,7 +300,17 @@ function onDocumentMouseMove(e) {
  * @param {Object} e The event object.
  */
 function onDragStart(e) {
+    e.preventDefault();
     isDragging = true;
+
+    if (e.touches && e.touches.length > 0) {
+        mouseX = e.touches[0].clientX - windowHalfX;
+        mouseY = e.touches[0].clientY - windowHalfY;
+    } else {
+        mouseX = e.clientX - windowHalfX;
+        mouseY = e.clientY - windowHalfY;
+    }
+    
     origPosX = prevPosX = mouseX;
     origPosY = prevPosY = mouseY;
     origTime = Date.now();
@@ -305,6 +321,7 @@ function onDragStart(e) {
  * @param {Object} e The event object.
  */
 function onDragEnd(e) {
+    e.preventDefault();
     isDragging = false;
     var curPosX = mouseX;
     var curPosY = mouseY;
@@ -371,6 +388,10 @@ updateMeasurements();
 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 document.addEventListener( 'mousedown', onDragStart, false );
 document.addEventListener( 'mouseup', onDragEnd, false );
+document.addEventListener( 'touchmove', onDocumentMouseMove, false );
+document.addEventListener( 'touchstart', onDragStart, false );
+document.addEventListener( 'touchend', onDragEnd, false );
+
 window.addEventListener( 'resize', updateMeasurements, false );
 
 // create new sphere

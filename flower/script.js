@@ -463,8 +463,15 @@ function render() {
  * @param {Object} e The event object.
  */
 function onDocumentMouseMove(e) {
-    mouseX = e.clientX * pixelRatio;
-    mouseY = e.clientY * pixelRatio;
+    e.preventDefault();
+    if (e.touches && e.touches.length > 0) {
+        mouseX = e.touches[0].clientX * pixelRatio;
+        mouseY = e.touches[0].clientY * pixelRatio;
+    }else {
+        mouseX = e.clientX * pixelRatio;
+        mouseY = e.clientY * pixelRatio;
+    }
+
 }
 
 /**
@@ -472,7 +479,17 @@ function onDocumentMouseMove(e) {
  * @param {Object} e The event object.
  */
 function onDragStart(e) {
+    e.preventDefault();
     isDragging = true;
+    
+    if (e.touches && e.touches.length > 0) {
+        mouseX = e.touches[0].clientX * pixelRatio;
+        mouseY = e.touches[0].clientY * pixelRatio;
+    }else {
+        mouseX = e.clientX * pixelRatio;
+        mouseY = e.clientY * pixelRatio;
+    }
+
     plant.onMouseDown();
 }
 
@@ -481,6 +498,7 @@ function onDragStart(e) {
  * @param {Object} e The event object.
  */
 function onDragEnd(e) {
+    e.preventDefault();
     isDragging = false;               
 }
 
@@ -500,6 +518,9 @@ overlay = new Overlay();
 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 document.addEventListener( 'mousedown', onDragStart, false );
 document.addEventListener( 'mouseup', onDragEnd, false );
+document.addEventListener( 'touchmove', onDocumentMouseMove, false );
+document.addEventListener( 'touchstart', onDragStart, false );
+document.addEventListener( 'touchend', onDragEnd, false );
 window.addEventListener( 'resize', updateMeasurements, false );
 
 // start rendering
