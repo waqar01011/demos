@@ -48,6 +48,89 @@ function Point(x, y) {
 function Vector(x, y) {
 	this.x = x;
 	this.y = y;
+
+	this.getLength = function() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+
+	this.getAngle = function() {
+	    return 90 - Math.atan2(this.y, this.x) / Math.PI * 180;
+	};
+
+	this.setAngle = function(angle) {
+		var length = this.getLength();
+		angle = angle / 180 * Math.PI;
+		this.x = Math.sin(angle) * length;
+		this.y = Math.cos(angle) * length;
+	};
+
+}
+
+// ————————————————————————————————————————————————————————————
+// LIMB
+// ————————————————————————————————————————————————————————————
+function Limb(x, y, angle, color) {
+	this.color = color;
+    this.x = x;
+	this.y = y;
+	this.originX = x;
+	this.originY = y;
+	this.vector = new Vector(2 + Math.random() * 10, 2 + Math.random() * 10);
+    this.vector.setAngle(angle);
+	this.life = 0;
+    this.maxlife = 15 + Math.random() * 40;
+    this.rnd = 5 * Math.random();
+    this.dir = (Math.random() > 0.5) ? Number(1) : Number(-1);
+    this.bent = Math.random() * 0.3;
+    this.limbPoints = [];
+    this.dead = false;
+}
+
+Limb.prototype.draw = function() {
+	if (this.life <= this.maxlife) {
+		var progress = (this.maxlife - this.life) / this.maxlife;
+		var thickness = progress * 12 + 2;
+
+		this.limbPoints.push({
+			"point": new Point(this.x, this.y),
+			"stroke": thickness
+		});
+
+	} else {
+		this.limbPoints.shift();
+		if (this.limbPoints.length <= 1) {
+			this.dead = true;
+		}
+	}
+	
+	if (this.limbPoints.length < 2) return;
+
+	for (var i = 1; i < this.limbPoints.length; i++) {
+		var lp = this.limbPoints[i];
+		ctx.beginPath();
+		ctx.lineWidth = lp['stroke'];
+		ctx.moveTo(this.limbPoints[i-1]['point'].x, this.limbPoints[i-1]['point'].y);
+		ctx.lineTo(lp['point'].x, lp['point'].y);
+		ctx.stroke();
+	}
+
+	this.life++;
+	this.vector.setAngle( this.vector.getAngle() + this.dir * (this.life + this.rnd) * this.bent);
+	this.x = this.x + this.vector.x;
+	this.y = this.y + this.vector.y;
+	
+	// if ( this.life >= maxlife)
+	// {
+	// this.removeEventListener(Event.ENTER_FRAME,draw);
+	// Plant.getInstance().createBloom(this.x + curX,this.y + curY,100,color);
+	// TweenLite.delayedCall(3,limbDie);
+	// }
+	// if(getTimer() % 10 == 0)
+	// {
+	// Plant.getInstance().createLeaf(this.x + curX,this.y + curY,vector.getRotation(),50,color);
+	// }
+
+
 }
 
 // ————————————————————————————————————————————————————————————
@@ -67,7 +150,7 @@ function Plant() {
 	this.x = 0;
 	this.y = 0;
 	this.vector;
-	this.color = "#000000";
+	this.color;
 	this.limbCount = 0;
 	
 	// this.leafes:Sprite;
@@ -80,12 +163,13 @@ Plant.prototype.onMouseDown = function() {
 	this.x = mouseX;
 	this.y = mouseY;
 
-    this.trailPoints.unshift({
+    this.trailPoints.push({
         "point": new Point(this.x, this.y),
         "draw": "move",
         "color": this.color,
         "time": Date.now()
     });
+
 }
 
 Plant.prototype.move = function() {
@@ -93,33 +177,39 @@ Plant.prototype.move = function() {
     this.x = this.x + this.speed * this.vector.x;
     this.y = this.y + this.speed * this.vector.y;
 
-    this.trailPoints.unshift({
+    this.trailPoints.push({
         "point": new Point(this.x, this.y),
         "draw": "line",
         "color": this.color,
         "time": Date.now()
     });
 
-
-    this.drawTrail();
-
-     // if(getTimer() % 6 == 0)
+     if(Date.now() % 6 == 0)
+     {
+        this.createLimb();
+     }
+     // if(Date.now() % 3 == 0)
      // {
-     //    createLimb(curX,curY,_vector.getAngle());
-     // }
-     // if(getTimer() % 3 == 0)
-     // {
-     //    createLeaf(curX,curY,_vector.getRotation(),100,_color);
+     //    this.createLeaf(curX,curY,_vector.getRotation(),100,_color);
      // }
 }
 
-Plant.prototype.drawTrail = function() {
+Plant.prototype.createLimb = function(x, y, angle) {
+	var limb = new Limb(this.x, this.y, this.vector.getAngle(), this.color);
+	this.limbStorage.push(limb);
+
+}
+
+Plant.prototype.draw = function() {
+	if (this.trailPoints.length == 0) return;
+
 	var i;
      
     ctx.globalCompositeOperation = "normal";
 	ctx.globalAlpha = 1;
 
 	// move to start
+	ctx.beginPath();
     ctx.moveTo(this.trailPoints[0]["point"].x, this.trailPoints[0]["point"].y);
 	ctx.strokeStyle = this.trailPoints[0]["color"];
 	ctx.lineWidth = 12;
@@ -131,27 +221,36 @@ Plant.prototype.drawTrail = function() {
     	if (tp['time'] + this.lifeSpan >= Date.now()) {
 
     		if (tp['draw'] == 'move') {
+    			ctx.stroke();
+    			ctx.beginPath();
     			ctx.moveTo(tp['point'].x, tp['point'].y);
     			ctx.strokeStyle = tp["color"];
     		} else {
     			ctx.lineTo(tp['point'].x, tp['point'].y);
     			ctx.strokeStyle = tp["color"];
-    			ctx.stroke();
     		}
     		
-    	} else {
-    		console.log("outdated");
     	}
     }
+	ctx.stroke();
 
- //    	)
- //    // remove outdated trailpoints
-	// for (i = this.trailPoints.length - 1; i >= 0; i--) {
- //    	var tp = this.trailPoints[i];
- //    	if (tp['time'] + this.lifeSpan < Date.now()) {
- //    		this.trailPoints.splice(i, 1);
- //    	} 
- //    }
+    // remove outdated trailpoints
+	for (i = this.trailPoints.length - 1; i >= 0; i--) {
+    	var tp = this.trailPoints[i];
+    	if (tp['time'] + this.lifeSpan < Date.now()) {
+    		this.trailPoints.splice(i, 1);
+    	} 
+    }
+
+    // draw limbs
+    for (i = this.limbStorage.length - 1; i >= 0; i--) {
+    	var limb = this.limbStorage[i];
+    	if (limb.dead) {
+			this.limbStorage.splice(i, 1);
+    	} else {
+    		limb.draw()
+    	}
+    }
 
 }
 
@@ -193,6 +292,7 @@ function render() {
     	plant.move();
     }
 
+    plant.draw();
     overlay.draw();
    
 }
