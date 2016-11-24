@@ -16,7 +16,8 @@ function SoundManager(fileList) {
     this.audio_instrumental = null;
     this.audio_vocal = null;
 
-    this.thingy;
+    this.thingy_vocal;
+    this.thingy_instrumental;
 
 }
 
@@ -41,9 +42,9 @@ SoundManager.prototype.init = function(){
     this.analyser_voice.smoothingTimeConstant = 0.3;
     this.analyser_voice.fftSize = 512;
 
-    // pitch processor
-    this.thingy = this.audioCtx.createScriptProcessor(8192, 1, 1);
-    this.thingy.onaudioprocess = function(ev) {
+    // pitch processor vocals
+    this.thingy_vocal = this.audioCtx.createScriptProcessor(8192, 1, 1);
+    this.thingy_vocal.onaudioprocess = function(ev) {
         var inp = ev.inputBuffer.getChannelData(0); 
         var out = ev.outputBuffer.getChannelData(0);
         var a;
@@ -51,6 +52,25 @@ SoundManager.prototype.init = function(){
         var l = inp.length;
         for (var i = 0; i < l; i++) {
                 a = Math.floor( i * Karaoke.soundPitch );
+                if(a >= l) {
+                    a = l-(a-l)-1;
+                }
+                s = inp[a];
+                out[i] = s;
+        }
+    }
+
+    // pitch processor instrumental - used even if not changing pitch, 
+    // so that the processing speed is the same and the music matches
+    this.thingy_instrumental = this.audioCtx.createScriptProcessor(8192, 1, 1);
+    this.thingy_instrumental.onaudioprocess = function(ev) {
+        var inp = ev.inputBuffer.getChannelData(0); 
+        var out = ev.outputBuffer.getChannelData(0);
+        var a;
+        var s;
+        var l = inp.length;
+        for (var i = 0; i < l; i++) {
+                a = Math.floor( i );
                 if(a >= l) {
                     a = l-(a-l)-1;
                 }
@@ -80,10 +100,11 @@ SoundManager.prototype.init = function(){
             this.audio_instrumental.connect(this.analyser_music);
             this.analyser_music.connect(this.analyzerNode_music);
 
-            this.audio_vocal.connect(this.thingy);  
+            this.audio_vocal.connect(this.thingy_vocal);  
+            this.audio_instrumental.connect(this.thingy_instrumental);  
 
-            this.thingy.connect(this.audioCtx.destination);  
-            this.audio_instrumental.connect(this.audioCtx.destination);  
+            this.thingy_vocal.connect(this.audioCtx.destination);  
+            this.thingy_instrumental.connect(this.audioCtx.destination);  
 
             this.loaded = true;
 
