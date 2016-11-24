@@ -1,0 +1,10 @@
+{
+  "name": "artofrawr_secondscreen",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "private": true,
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  }
+}

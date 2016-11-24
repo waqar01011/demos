@@ -1,0 +1,73 @@
+---
+
+# SETUP ------------------------------------------------------------------------
+
+- name: Add latest stable node repo
+  apt_repository: repo='ppa:chris-lea/node.js' update_cache=yes state=present
+
+- name: Install base packages
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - build-essential
+    - git
+    - supervisor
+    - node
+    - nodejs
+
+- name: Stop node app if it's currently running
+  supervisorctl: name={{ app }} state=stopped
+  ignore_errors: yes
+
+- name: Delete current node app folder
+  file: path="{{ path }}/node" state=absent
+
+- name: Create the needed folders
+  file: 
+    path={{ item }}
+    mode=0775
+    state=directory
+  with_items:
+    - "{{ path }}/tmp"
+    - "{{ path }}/node"
+    - "{{ path }}/logs"
+
+
+# NODE APP ---------------------------------------------------------------------
+
+- name: Pull git repo into tmp folder
+  git: repo={{ repo }} dest={{ path }}/tmp version=master force=true
+
+- name: Copy node app portion to proper location
+  shell: cp {{ path }}/tmp/secondscreen/node/* {{ path }}/node/*
+
+- name: Delete tmp Folder
+  file: path="{{ path }}/tmp" state=absent
+
+- name: Install npm packages
+  command: npm install
+  args:
+    chdir: "{{ path }}/node"
+
+- name: Set folder permissions
+  file: path={{ path }}/node
+        owner={{ user }}
+        mode=0775
+        state=directory
+        recurse=yes
+
+- name: Allow traffic on node port
+  ufw: rule=allow port={{item}}
+  with_items:
+    - 8001
+
+
+# SUPERVISOR -------------------------------------------------------------------
+
+- name: Create the Supervisor config file
+  template: src=supervisor.j2 dest=/etc/supervisor/conf.d/{{ app }}.conf
+
+- name: Re-read the Supervisor config files
+  supervisorctl: name={{ app }} state=present
+
+- name: Start supervisor
+  supervisorctl: name={{ application_name }} state=started

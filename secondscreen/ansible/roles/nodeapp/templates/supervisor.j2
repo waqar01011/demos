@@ -1,0 +1,9 @@
+[program:{{ app }}]
+
+directory = {{ path }}/node
+command = nodejs app.js  
+autostart = true  
+autorestart = true
+stderr_logfile = {{ path }}/logs/node_error.log
+stdout_logfile = {{ path }}/logs/node_output.log
+user = {{ user }}
