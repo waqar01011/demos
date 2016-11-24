@@ -239,6 +239,11 @@ Limb.prototype.draw = function() {
             "stroke": thickness
         });
 
+        if(Date.now() % 10 == 0) {
+            var leaf = new Leaf(this.x, this.y, this.vector.getRotation(), this.color);
+            leafStorage.push(leaf);
+        }
+        
     // blooming
     } else if (!this.bloomStarted ||  this.bloomStarted + this.bloomDuration > Date.now()) {
 
@@ -276,10 +281,7 @@ Limb.prototype.draw = function() {
     this.y = this.y + this.vector.y;
     
     
-    if(Date.now() % 10 == 0) {
-        var leaf = new Leaf(this.x, this.y, this.vector.getRotation(), this.color);
-        leafStorage.push(leaf);
-    }
+    
 
 }
 
@@ -338,48 +340,52 @@ Plant.prototype.move = function() {
 
 
 Plant.prototype.draw = function() {
-    if (trailPoints.length == 0) return;
+    
 
     var i;
      
     ctx.globalCompositeOperation = "normal";
     ctx.globalAlpha = 1;
 
-    // move to start
-    ctx.beginPath();
-    ctx.moveTo(trailPoints[0]["point"].x, trailPoints[0]["point"].y);
-    ctx.strokeStyle = trailPoints[0]["color"];
-    ctx.lineWidth = 12;
+    // main flower trail
+    if (trailPoints.length > 0) {
 
-    // draw trailpoints
-    for (var i = 1; i < trailPoints.length; i++) {
-        var tp = trailPoints[i];
+        // move to start
+        ctx.beginPath();
+        ctx.moveTo(trailPoints[0]["point"].x, trailPoints[0]["point"].y);
+        ctx.strokeStyle = trailPoints[0]["color"];
+        ctx.lineWidth = 12;
 
-        if (tp['time'] + this.lifeSpan >= Date.now()) {
+        // draw trailpoints
+        for (var i = 1; i < trailPoints.length; i++) {
+            var tp = trailPoints[i];
 
-            if (tp['draw'] == 'move') {
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(tp['point'].x, tp['point'].y);
-                ctx.strokeStyle = tp["color"];
-            } else {
-                ctx.lineTo(tp['point'].x, tp['point'].y);
-                ctx.strokeStyle = tp["color"];
+            if (tp['time'] + this.lifeSpan >= Date.now()) {
+
+                if (tp['draw'] == 'move') {
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(tp['point'].x, tp['point'].y);
+                    ctx.strokeStyle = tp["color"];
+                } else {
+                    ctx.lineTo(tp['point'].x, tp['point'].y);
+                    ctx.strokeStyle = tp["color"];
+                }
+                
             }
-            
+        }
+        ctx.stroke();
+
+        // remove outdated trailpoints
+        for (i = trailPoints.length - 1; i >= 0; i--) {
+            var tp = trailPoints[i];
+            if (tp['time'] + this.lifeSpan < Date.now()) {
+                trailPoints.splice(i, 1);
+            } 
         }
     }
-    ctx.stroke();
 
-    // remove outdated trailpoints
-    for (i = trailPoints.length - 1; i >= 0; i--) {
-        var tp = trailPoints[i];
-        if (tp['time'] + this.lifeSpan < Date.now()) {
-            trailPoints.splice(i, 1);
-        } 
-    }
-
-    // draw limbs
+    // limbs
     for (i = limbStorage.length - 1; i >= 0; i--) {
         var limb = limbStorage[i];
         if (limb.dead) {
@@ -389,7 +395,7 @@ Plant.prototype.draw = function() {
         }
     }
 
-    // draw blooms
+    // blooms
     for (i = bloomStorage.length - 1; i >= 0; i--) {
         var bloom = bloomStorage[i];
         if (bloom.dead) {
@@ -399,7 +405,7 @@ Plant.prototype.draw = function() {
         }
     }
 
-    // draw leafs
+    // leafs
     for (i = leafStorage.length - 1; i >= 0; i--) {
         var leaf = leafStorage[i];
         if (leaf.dead) {
