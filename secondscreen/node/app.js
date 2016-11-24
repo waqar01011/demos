@@ -24,7 +24,7 @@ var server = {
         });
 
         // listens for connections to the socket server
-        this.io.on('connection', function( socket ) {
+        socketio.on('connection', function( socket ) {
             console.log('connection', socket)
         }.bind( this ) );
 
