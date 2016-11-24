@@ -8,8 +8,7 @@
   vars:
     app: "artofrawr_secondscreen"
     path: "/srv/artofrawr/secondscreen"
-    user: "jens"
-    repo: "git@github.com:artofrawr/demos.git"
+    repo: "https://github.com/artofrawr/demos.git"
 
   roles:
     - nodeapp

@@ -6,7 +6,7 @@ It's commited to GitHub only for educational purposes and cannot be executed wit
 
 The playbook would be run like this:
 
-        ansible-playbook nodeapp.yml -i hosts --private-key /location/of/key
+        ansible-playbook nodeapp.yml -i hosts --private-key /location/of/key -u username
 
 ## Links: 
 

@@ -15,7 +15,9 @@
     - nodejs
 
 - name: Stop node app if it's currently running
-  supervisorctl: name={{ app }} state=stopped
+  supervisorctl: 
+    name="{{ app }}"
+    state=stopped
   ignore_errors: yes
 
 - name: Delete current node app folder
@@ -37,23 +39,23 @@
 - name: Pull git repo into tmp folder
   git: repo={{ repo }} dest={{ path }}/tmp version=master force=true
 
-- name: Copy node app portion to proper location
-  shell: cp {{ path }}/tmp/secondscreen/node/* {{ path }}/node/*
+- name: Move node app portion to proper location
+  shell: mv {{ path }}/tmp/secondscreen/node {{ path }}
 
 - name: Delete tmp Folder
   file: path="{{ path }}/tmp" state=absent
+
+- name: Set folder permissions
+  file: path={{ path }}/node
+        owner={{ ansible_ssh_user }}
+        mode=0775
+        state=directory
+        recurse=yes
 
 - name: Install npm packages
   command: npm install
   args:
     chdir: "{{ path }}/node"
-
-- name: Set folder permissions
-  file: path={{ path }}/node
-        owner={{ user }}
-        mode=0775
-        state=directory
-        recurse=yes
 
 - name: Allow traffic on node port
   ufw: rule=allow port={{item}}
@@ -64,10 +66,17 @@
 # SUPERVISOR -------------------------------------------------------------------
 
 - name: Create the Supervisor config file
-  template: src=supervisor.j2 dest=/etc/supervisor/conf.d/{{ app }}.conf
+  template: 
+    src=supervisor.j2 
+    dest="/etc/supervisor/conf.d/{{ app }}.conf"
 
-- name: Re-read the Supervisor config files
-  supervisorctl: name={{ app }} state=present
+- name: Re-read the Supervisor config file
+  supervisorctl: 
+    name="{{ app }}" 
+    state=present
 
-- name: Start supervisor
-  supervisorctl: name={{ application_name }} state=started
+- name: Restart the Supervisor config file
+  supervisorctl: 
+    name="{{ app }}" 
+    state=restarted
+  ignore_errors: yes
