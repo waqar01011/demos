@@ -64,12 +64,12 @@ SoundManager.prototype.init = function(){
             
             this.audio_instrumental = this.audioCtx.createBufferSource();
             this.audio_instrumental.buffer = bufferList[0];
-            this.audio_instrumental.loop = true;
+            this.audio_instrumental.loop = false;
             
             
             this.audio_vocal = this.audioCtx.createBufferSource();
             this.audio_vocal.buffer = bufferList[1];
-            this.audio_vocal.loop = true;
+            this.audio_vocal.loop = false;
             
 
             this.duration = bufferList[0].duration * 1000;

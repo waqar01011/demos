@@ -205,12 +205,14 @@ header #next:hover:after, header #prev:hover:after {
   width: auto;
   display: inline-block;
 }
-.description a {
+.description .links {
   float: right;
   display: inline-block;
-  margin: 0;
-  margin-right: 20px;
-  margin-top: 18px;
+  margin-right: 15px;
+}
+.description .links a {
+  display: inline-block;
+  margin: 18px 5px 0 5px;
   border: 2px solid black;
   padding: 0 20px;
   font-family: "Roboto", sans-serif;
@@ -235,7 +237,7 @@ header #next:hover:after, header #prev:hover:after {
   .description p {
     display: none;
   }
-  .description a {
+  .description .links {
     float: none;
     margin: 0;
   }
