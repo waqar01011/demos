@@ -1,0 +1,71 @@
+.demo {
+
+	@include container();
+	text-align: center;
+	padding-top: 50px;
+
+	iframe {
+		max-width: 100%;
+	}
+
+	#disconnected {
+
+		padding-top: 50px;
+
+		p {
+			@include column(6,3);
+			float: none;
+			clear: both;
+			text-align: center;
+
+			font-family: $fontMain;
+			font-weight: 400;
+			font-size: 16px;
+		    letter-spacing: 0.01em;
+
+		    line-height: 1.2;
+
+		    padding-bottom: 20px;
+
+		}
+
+		h2 {
+
+			@include column(8,2);
+			float: none;
+			clear: both;
+			text-align: center;
+
+			font-family: $fontMain;
+			font-weight: 700;
+			font-size: 34px;
+		    letter-spacing: 0.01em;
+
+		    padding-bottom: 30px;
+		    line-height: 1.2;
+
+		}
+
+	}
+
+	#connected {
+		p {
+			@include column(8,2);
+			float: none;
+			clear: both;
+			text-align: center;
+
+			font-family: $fontMain;
+			font-weight: 700;
+			font-size: 34px;
+		    letter-spacing: 0.01em;
+
+		    padding-bottom: 30px;
+		    line-height: 1.2;
+
+			display: none;
+
+		}
+	}
+
+}

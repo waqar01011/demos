@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+		
+	<link href="../styles/desktop.css" rel="stylesheet" type="text/css" />
+
+	<body>
+
+		<div class="demo">
+
+	        <div id="player"></div>
+	   		
+	   		<div id="disconnected">
+		   		<p>To connect a device enter this unique id:</p>
+		   		<h2 id="handshakeID"></h2>
+		   	</div>
+
+		   	<div id="connected">
+		   		<p>You're connected!</p>
+		   	</div>
+	    </div>
+	    
+	   	<div class="description">
+            <p>A second screen demo, implemented in node.js.</p>
+            <div class="links">
+                <a href="//github.com/artofrawr/demos/tree/master/secondscreen" target="_blank">Source on GitHub</a>
+                <a href="/">Home</a>
+            </div>
+        </div>
+
+
+		<script src="script.js"></script>
+
+		<script type="text/javascript">
+			
+			// ---------------------------------------------------
+            // The actual demo class from script.js
+            // ---------------------------------------------------
+			var demo = new SecondScreenDemo();
+			
+
+            // ---------------------------------------------------
+            // Youtube Player 
+            // ---------------------------------------------------
+            var video_id = 'k_kQAn9vBI4';
+			var isPlaying = true;
+			var volume  = 1;
+			var fullscreen  = false;
+			var player;
+
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: video_id,
+                    playerVars: { 'controls': 0 },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+	                }               
+	            });
+	        }
+
+            function onPlayerStateChange ( event ) {
+                if ( event.data == YT.PlayerState.ENDED ) {
+                    playVideo();
+                }
+            }
+
+            function onPlayerReady ( event ) {
+                playVideo();
+            }
+
+            function playVideo () {
+                player.playVideo();
+            }
+
+            function pauseVideo ( channel_id ) {
+                // Pause the requested channel.
+                players[ channel_id ].pauseVideo();
+            }
+
+            // ---------------------------------------------------
+            // start the youtube API loading to activate videos
+            // ---------------------------------------------------
+
+            var tag = document.createElement('script');
+            tag.src = "//www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,134 @@
+.demo {
+
+	@include container();
+	
+	padding-top: 20px;
+
+	#disconnected {
+
+		text-align: center;
+
+		p {
+			@include column(6,3);
+			float: none;
+			clear: both;
+			text-align: center;
+
+			font-family: $fontMain;
+			font-weight: 400;
+			font-size: 16px;
+		    letter-spacing: 0.01em;
+
+		    line-height: 1.2;
+
+		    padding-bottom: 20px;
+
+		}
+
+		input {
+
+			    width: 160px;
+			    height: 50px;
+			    background: white;
+			    border: 1px solid black;
+			    font-family: $fontMain;
+				font-weight: 700;
+				font-size: 34px;
+			    letter-spacing: 0.01em;
+			    line-height: 50px;
+			    text-align: center;
+		}
+
+		input:focus {
+		    outline:none;
+		}
+
+		a {
+            display: inline-block;
+            text-align: center;
+            margin: 18px 5px 0 5px;
+            border: 2px solid black;
+            padding: 0 20px;
+
+            font-family: $fontMain;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+            color: black;
+
+            line-height: 40px; 
+            height: 40px;
+            text-decoration: none; 
+        }
+
+	    a:hover {
+	        border-color: black;
+	        background: black;
+	        color: white;
+	    }
+
+	}
+
+
+	#connected {
+		h2 {
+			@include column(8,2);
+			float: none;
+			clear: both;
+			text-align: center;
+			color: black;
+
+			font-family: $fontMain;
+			font-weight: 700;
+			font-size: 34px;
+		    letter-spacing: 0.01em;
+
+		    padding-bottom: 30px;
+		    line-height: 1.2;
+
+		}
+
+		#time {
+			display: block;
+			text-align: center;
+
+			font-family: $fontMain;
+			font-weight: 400;
+			font-size: 16px;
+		    letter-spacing: 0.01em;
+
+		    line-height: 1.2;
+
+		    padding-bottom: 20px;
+		}
+
+		.controls {
+			text-align: center;
+
+			a {
+	            display: inline-block;
+	            text-align: center;
+	            margin: 18px 5px 0 5px;
+	            border: 2px solid black;
+	            padding: 0 20px;
+
+	            font-family: $fontMain;
+	            font-weight: 500;
+	            letter-spacing: 0.01em;
+	            font-size: 16px;
+	            color: black;
+
+	            line-height: 40px; 
+	            height: 40px;
+	            text-decoration: none; 
+	        }
+
+		    a:hover, a.active {
+		        border-color: black;
+		        background: black;
+		        color: white;
+		    }
+		}
+	}
+
+}

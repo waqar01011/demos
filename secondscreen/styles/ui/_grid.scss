@@ -1,0 +1,119 @@
+// Profound Grid 
+// http://www.profoundgrid.com
+
+// --------------------------------------------------------------------------------
+// Grid Setup
+// --------------------------------------------------------------------------------
+
+$break_tablet: 600px;
+$break_desktop: 1024px;
+
+$total_columns: 	12;			
+$total_width:		100%; 		
+$gutter_width:		3%;			
+$container_margin:	3%;	
+
+
+
+// --------------------------------------------------------------------------------
+// Functions
+// --------------------------------------------------------------------------------
+
+
+@function element_width($column_index){
+	@if ($total_width == 100%){
+	  	$not_rounded_value: (((100% + $gutter_width)/$total_columns)*$column_index)-$gutter_width;
+	    $not_rounded_value: $not_rounded_value * 100;
+	    $rounded_value: round($not_rounded_value)/100;
+	    @return $rounded_value;
+	}@else{
+		@return ((($total_width + $gutter_width)/$total_columns)*$column_index)-$gutter_width;
+	}
+}
+
+@function column_width(){
+	@if ($total_width == 100%){
+	  	$not_rounded_value: (((100% + $gutter_width)/$total_columns))-$gutter_width;
+	    $not_rounded_value: $not_rounded_value * 100;
+	    $rounded_value: round($not_rounded_value)/100;
+	    @return $rounded_value * 1%;
+	}@else{
+		@return ($total_width - ($gutter_width*($total_columns - 1)))/$total_columns;
+	}
+}
+
+
+// --------------------------------------------------------------------------------
+// Mixins
+// --------------------------------------------------------------------------------
+
+/**
+ * Clearfix
+ */
+@mixin clearfix(){
+	overflow: hidden;
+	*zoom: 1;
+}
+
+/**
+ * Establish a grid-containing element.
+ */
+@mixin container(){
+	width: $total_width;
+	padding: 0 $container_margin;
+	box-sizing: border-box;
+	@include clearfix();
+}
+
+/**
+ * Align an element inside a containter to the grid.
+ */
+@mixin column($_columns_width, $_padding_columns:null){
+	float: left;
+	margin-right: -100%;
+	$_width_perc: element_width($_columns_width);
+    width: $_width_perc;
+
+    @if($_padding_columns != null){
+    	@include push($_padding_columns);
+    }
+}
+
+/**
+ * Move an element to a specific column in the grid.
+ */
+@mixin push($_column_index){
+	$_width_perc: 0;
+	@if ($total_width == 100%){
+		$_width_perc: ($gutter_width + element_width($_column_index));
+	}@else{
+		//$_width_perc: (column_width() + $gutter_width)*$_column_index;
+		$_width_perc: ($gutter_width + element_width($_column_index));
+	}
+
+	margin-left: $_width_perc;
+}
+
+/**
+ * Create n-th child rule for grid that has elements spanning multiple rows.
+ */
+@mixin generate_grid_positions($_column_selector, $_element_width){
+
+	$_cols_per_row: floor($total_columns / $_element_width);
+
+	// create rule for each element
+	@for $i from 1 through $_cols_per_row{
+
+		#{$_column_selector}:nth-child(#{$_cols_per_row}n+#{$i}){
+			@include push((($i - 1)*$_element_width));
+			margin-bottom: $gutter_width;
+
+			@if ($i == 1) {
+				clear: both;
+				@include clearfix();
+			}@else{
+				clear: none;
+			}
+		}
+	}
+}

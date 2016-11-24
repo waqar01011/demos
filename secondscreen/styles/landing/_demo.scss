@@ -1,0 +1,120 @@
+@import "compass/css3/opacity";
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+
+.demo {
+
+	@include container();
+	
+	padding-bottom: 100px;
+
+	h2 {
+
+		@include column(8,2);
+		float: none;
+		clear: both;
+		text-align: center;
+
+		font-family: $fontMain;
+		font-weight: 700;
+		font-size: 34px;
+	    letter-spacing: 0.01em;
+
+		padding-top: 50px;
+	    padding-bottom: 30px;
+	    line-height: 1.2;
+
+	}
+
+	p {
+		@include column(6,3);
+		float: none;
+		clear: both;
+		text-align: center;
+
+		font-family: $fontMain;
+		font-weight: 400;
+		font-size: 16px;
+	    letter-spacing: 0.01em;
+
+	    line-height: 1.2;
+
+	    padding-bottom: 20px;
+
+	}	
+
+	.links {
+		@include column(6, 3);
+
+		@include clearfix();
+		clear: both;
+
+		a {
+			text-decoration: none;
+			display: block;
+			width: 40%;
+			padding: 5%;
+			color: black;
+
+			float: left;
+			position: relative;
+			@include transition(background-color .6s cubic-bezier(.23,1,.32,1)); 
+			
+			svg {
+				width: 100%;
+				@include transition(transform .3s cubic-bezier(.23,1,.32,1));
+				@include transform(scale(0.9));
+
+				.st0 {
+					@include transition(stroke .3s cubic-bezier(.23,1,.32,1));
+					fill:none;
+					stroke: black;
+					stroke-width:4;
+					stroke-linecap:round;
+					stroke-linejoin:round;
+					stroke-miterlimit:10;
+				}
+			    
+			    .st1{
+			    	@include transition(fill .3s cubic-bezier(.23,1,.32,1));
+			    	fill: black;
+			    }
+			}
+		}
+
+		a:hover {
+			background: black;
+			color: white;
+			svg {
+				@include transform(scale(1));
+				.st0{
+					stroke: white;
+				}
+				.st1{
+					fill: white;
+				}
+			}
+		}
+	}
+}
+
+
+@media screen and (max-width: 1024px) {
+	.demo {
+		.links {
+			@include column(12);
+			margin-left: 0%;
+		}	
+
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.demo {
+		h2, p {
+			@include column(12);
+			margin-left: 0%;
+		}	
+
+	}
+}
