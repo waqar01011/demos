@@ -8,7 +8,6 @@
   vars:
     app: "artofrawr_secondscreen"
     path: "/srv/artofrawr/secondscreen"
-    key: "/projects/_keys/linode_dev"
     user: "jens"
     repo: "git@github.com:artofrawr/demos.git"
 
