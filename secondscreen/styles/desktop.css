@@ -192,3 +192,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   line-height: 1.2;
   display: none;
 }
+.demo #info {
+  float: left;
+  margin-right: -100%;
+  width: 48.5%;
+  margin-left: 25.75%;
+  float: none;
+  clear: both;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  padding-bottom: 20px;
+}
+.demo #info a {
+  color: #0068B7;
+  text-decoration: none;
+}
+.demo #info a:hover {
+  text-decoration: underline;
+}

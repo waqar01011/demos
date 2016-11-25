@@ -1,5 +1,7 @@
 var SecondScreenDemo = function() {
 
+    EventDispatcher.prototype.apply( SecondScreenDemo.prototype );
+
     this.server = (window.location.hostname == "localhost") ?  "http://localhost:8001" : "http://devserver.artofrawr.com:8001";
     this.socket = null;
     this.id = null;
@@ -40,8 +42,20 @@ SecondScreenDemo.prototype.addEventListeners = function() {
     this.socket.on('newID', this.onID.bind(this));    
     this.socket.on('messageRecieved', this.onMessageReceived.bind(this));    
     this.socket.on('handshake', this.onHandshake.bind(this));   
+    this.socket.on('disconnect', this.onDisconnect.bind(this));
+    this.socket.on('handshakeEnd', this.onDisconnect.bind(this));
 }
  
+/**
+ * After a disconnect, show the id for connecting again.
+ */   
+SecondScreenDemo.prototype.onDisconnect = function() {
+    console.log('disconnected');
+    this.elDisconnected.style.display = "block";
+    this.elConnected.style.display = "none";
+}
+
+
 /**
  * After a successful connection, let the socket know that we're a desktop client.
  */   
@@ -72,8 +86,7 @@ SecondScreenDemo.prototype.sendMessage = function(data) {
 }
 
 SecondScreenDemo.prototype.onMessageReceived = function(data) {
-    data= JSON.parse(data);
+    data = JSON.parse(data);
     console.log("received message:", data);
-    var event = new CustomEvent('data', data);
-    this.dispatchEvent(event);
+    this.dispatchEvent( { type: 'message', data: data } );
 }

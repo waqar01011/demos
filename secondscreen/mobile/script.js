@@ -35,7 +35,7 @@ function Demo(socket) {
     this.elButtonConnect = document.getElementById("buttonConnect");
     this.elButtonPlay = document.getElementById("buttonPlay");
     this.elButtonPause = document.getElementById("buttonPause");
-    this.elButtonRestart = document.getElementById("buttonRestart");
+    this.elButtonBassline = document.getElementById("buttonBassline");
     this.elButtonDisconnect = document.getElementById("buttonDisconnect");
     this.elConnected = document.getElementById("connected");
     this.elTime = document.getElementById("time");
@@ -45,6 +45,8 @@ function Demo(socket) {
     this.socket.on('handshakeDenied', this.onHandshakeDenied.bind(this));
     this.socket.on('handshake', this.onHandshake.bind(this));
     this.socket.on('messageRecieved', this.onMessageReceived.bind(this));
+    this.socket.on('disconnect', this.onDisconnect.bind(this));
+    this.socket.on('handshakeEnd', this.onDisconnect.bind(this));
     this.elButtonConnect.addEventListener("click", this.onHandshakeRequest.bind(this));  
     
     this.elButtonPlay.addEventListener("click", function() {
@@ -53,6 +55,15 @@ function Demo(socket) {
 
     this.elButtonPause.addEventListener("click", function() {
         this.sendMessage({type: "play", value: false});
+    }.bind(this)); 
+
+    this.elButtonBassline.addEventListener("click", function() {
+        this.sendMessage({type: "bassline"});
+    }.bind(this));
+
+    this.elButtonDisconnect.addEventListener("click", function() {
+        this.socket.disconnect();
+        this.onDisconnect();
     }.bind(this));  
 
 }
@@ -63,10 +74,24 @@ function Demo(socket) {
  */   
 Demo.prototype.onConnect = function() {
     console.log('connected');
+
     this.socket.emit('setType', "mobile");
     // hide loading
     this.elLoader.style.display = "none";
     this.elDisconnected.style.display = "block";
+}
+
+/**
+ * After a disconnect, show the form for connecting again.
+ */   
+Demo.prototype.onDisconnect = function() {
+    console.log('disconnected');
+    this.elInputID.value = '';
+    this.elLoader.style.display = "none";
+    this.elWarning.style.display = "none";
+    this.elDisconnected.style.display = "block";
+    this.elConnected.style.display = "none";
+    this.socket.connect();
 }
 
 /**
@@ -111,8 +136,12 @@ Demo.prototype.onMessageReceived = function(data) {
     console.log("received message:", data);
 
     if (data.type == "time") {
-        // convert seconds to m:ss, e.g. 63 -> 1:03
-        var strTime = Math.floor(data.value / 60) + ":" + String("00" + Math.floor( data.value - Math.floor(data.value/60)*60)).slice(-2);
-        this.elTime.innerHTML = strTime;
+        this.setTime(data.value);
     }
+}
+
+Demo.prototype.setTime = function(seconds) {
+    // convert seconds to m:ss, e.g. 63 -> 1:03
+    var strTime = Math.floor(seconds / 60) + ":" + String("00" + Math.floor( seconds - Math.floor(seconds/60)*60)).slice(-2);
+    this.elTime.innerHTML = strTime;
 }
