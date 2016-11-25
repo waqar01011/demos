@@ -2,14 +2,24 @@
 
 	@include container();
 	
-	padding-top: 20px;
+	padding-top: 40px;
+	padding-bottom: 100px;
+	#loading {
+		display: block;
+		text-align: center;
+
+		font-family: $fontMain;
+		font-weight: 500;
+		font-size: 20px;
+	    letter-spacing: 0.01em;
+	}
 
 	#disconnected {
-
+		display:none;
 		text-align: center;
 
 		p {
-			@include column(6,3);
+			@include column(10,1);
 			float: none;
 			clear: both;
 			text-align: center;
@@ -23,6 +33,18 @@
 
 		    padding-bottom: 20px;
 
+		}
+
+		#warning {
+			display: none;
+			padding-bottom: 30px;
+
+			span {
+				display: block;
+				color: red;
+				font-size: 20px;
+				font-weight: 700;
+			}
 		}
 
 		input {
@@ -71,8 +93,11 @@
 
 
 	#connected {
+
+		display:none;
+
 		h2 {
-			@include column(8,2);
+			@include column(10, 1);
 			float: none;
 			clear: both;
 			text-align: center;

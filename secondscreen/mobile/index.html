@@ -7,28 +7,25 @@
 
 		<div class="demo">
 
+            <div id="loading">
+                <p>Loading...</p>
+            </div>
+
 	   		<div id="disconnected">
-		   		<p>To connect to a device enter its unique id:</p>
-		   		<input type="text" value="" placeholder="XXXXX" /><br/>
-                <a href="#">Connect</a>
+		   		<p>To connect to the other device, enter its unique id:</p>
+                <p id="warning"><span>Connection failed.</span>Please make sure you have loaded the page on the other device and that you entered the correct id.</p>
+                <input id="inputID" type="text" value="" placeholder="XXXXX" /><br/>
+                <a id="buttonConnect" href="#">Connect</a>
 		   	</div>
 
 		   	<div id="connected">
 		   		<h2>You're connected!</h2>
                 <div id="time">0:00</div>
                 <div class="controls">
-                    <a href="#">PLAY</a>
-                    <a href="#">PAUSE</a>
-                    <a href="#">RESTART</a>
-                </div>
-
-                <div class="info">
-                    <p>Artist - Grades</p>
-                    <p>Dancer - Takasu Raika</p>
-                    <p>Dancer - Takasu Raika</p>
-                    <p>Director – Taichi Kimura</p>
-                    <p>Producer – Takuma Hiramatsu</p>
-                    <p>Animation – Rapparu</p>
+                    <a id="buttonPlay" href="#">PLAY</a>
+                    <a id="buttonPause" href="#">PAUSE</a>
+                    <a id="buttonRestart" href="#">RESTART</a>
+                    <a id="buttonDisconnect" href="#">DISCONNECT</a>
                 </div>
 		   	</div>
 	    </div>
@@ -43,67 +40,6 @@
 
 
 		<script src="script.js"></script>
-
-		<script type="text/javascript">
-			
-			// ---------------------------------------------------
-            // The actual demo class from script.js
-            // ---------------------------------------------------
-			var demo = new SecondScreenDemo();
-			
-
-            // ---------------------------------------------------
-            // Youtube Player 
-            // ---------------------------------------------------
-            var video_id = 'k_kQAn9vBI4';
-			var isPlaying = true;
-			var volume  = 1;
-			var fullscreen  = false;
-			var player;
-
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('player', {
-                    height: '390',
-                    width: '640',
-                    videoId: video_id,
-                    playerVars: { 'controls': 0 },
-                    events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
-	                }               
-	            });
-	        }
-
-            function onPlayerStateChange ( event ) {
-                if ( event.data == YT.PlayerState.ENDED ) {
-                    playVideo();
-                }
-            }
-
-            function onPlayerReady ( event ) {
-                playVideo();
-            }
-
-            function playVideo () {
-                player.playVideo();
-            }
-
-            function pauseVideo ( channel_id ) {
-                // Pause the requested channel.
-                players[ channel_id ].pauseVideo();
-            }
-
-            // ---------------------------------------------------
-            // start the youtube API loading to activate videos
-            // ---------------------------------------------------
-
-            var tag = document.createElement('script');
-            tag.src = "//www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-		</script>
 
 	</body>
 

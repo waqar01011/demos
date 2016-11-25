@@ -49,8 +49,8 @@
 	}
 
 	#connected {
-		p {
 			@include column(8,2);
+			padding-top: 50px;
 			float: none;
 			clear: both;
 			text-align: center;
@@ -64,8 +64,6 @@
 		    line-height: 1.2;
 
 			display: none;
-
-		}
 	}
 
 }

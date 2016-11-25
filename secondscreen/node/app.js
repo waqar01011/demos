@@ -14,9 +14,9 @@ var Client = function(socket) {
     this.socket = socket;
     this.id = server.getNewId();
     this.type = null;
-    this.connections = []; 
+    this.connection = null; 
 
-    debug('new client: ' + this.id);
+    debug('new client: ' + this.id + ' (total clients: ' + (server.clients.length + 1) + ')');
     // let client know about assigned id
     this.socket.emit("newID", this.id);
 
@@ -26,25 +26,49 @@ var Client = function(socket) {
 Client.prototype.addEventListeners = function() {
     this.socket.on('handshakeRequest', this.onHandShakeRequest.bind(this));
     this.socket.on('setType', this.onSetType.bind(this));
+    this.socket.on('sendMessage', this.sendMessage.bind(this));
     this.socket.on('disconnect', this.onDisconnect.bind(this));
-}
-
-Client.prototype.onHandShakeRequest = function(targetClientID) {
-
 }
 
 Client.prototype.onSetType = function(type) {
     debug("setType " + type);
+    this.type = type;
+}
+
+Client.prototype.onHandShakeRequest = function(targetClientID) {
+    // see if we can find the client with the specified id
+    console.log(this.id + " trying to handshake with " + targetClientID);
+    var targetClient = server.clients.find(function(client) { return client.id == targetClientID; });
+    
+    if (targetClient && targetClient.type == Client.TYPE.DESKTOP) {
+        console.log('handshake success');
+        this.handshake(targetClient);
+        targetClient.handshake(this);
+    } else {
+        console.log('denying handshake');
+        this.socket.emit('handshakeDenied');
+    }
+}
+
+Client.prototype.handshake = function(client) {
+    this.connection = client;
+    this.socket.emit('handshake');
+}
+
+Client.prototype.handshakeEnd = function() {
+    this.connection = null;
+    this.socket.emit('handshakeEnd');
 }
 
 Client.prototype.onDisconnect = function() {
     debug("client disconnected: " + this.id);
-    
-    this.connections.forEach(function(connection) {
-        connection.emit('handshakeDisconnect', this.id);
-    });
-
+    if (this.connection) this.connection.handshakeEnd();
     server.deleteClient(this);
+}
+
+Client.prototype.sendMessage = function(data) {
+    console.log('sending message' + data);
+    if (this.connection) this.connection.socket.emit('messageRecieved', data);
 }
 
 Client.TYPE = {

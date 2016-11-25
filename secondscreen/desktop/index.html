@@ -10,13 +10,11 @@
 	        <div id="player"></div>
 	   		
 	   		<div id="disconnected">
-		   		<p>To connect a device enter this unique id:</p>
+		   		<p>When asked for it, use this unique id to connect the other device:</p>
 		   		<h2 id="handshakeID"></h2>
 		   	</div>
 
-		   	<div id="connected">
-		   		<p>You're connected!</p>
-		   	</div>
+		   	<div id="connected">You're connected!</div>
 	    </div>
 	    
 	   	<div class="description">
@@ -36,7 +34,9 @@
             // The actual demo class from script.js
             // ---------------------------------------------------
 			var demo = new SecondScreenDemo();
-			
+			demo.addEventListener('data', function (e) {
+                console.log(e.data);
+            }, false);
 
             // ---------------------------------------------------
             // Youtube Player 
@@ -46,6 +46,7 @@
 			var volume  = 1;
 			var fullscreen  = false;
 			var player;
+            var progressTimer;
 
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('player', {
@@ -61,6 +62,15 @@
 	        }
 
             function onPlayerStateChange ( event ) {
+                if ( event.data == YT.PlayerState.PLAYING ) {
+                    if (progressTimer) clearTimeout(progressTimer);
+                    progressTimer = setInterval(function() {
+                        demo.sendMessage({type:"time", value: player.getCurrentTime()});
+                    }, 1000);        
+                } else {
+                    if (progressTimer) clearTimeout(progressTimer);
+                }
+
                 if ( event.data == YT.PlayerState.ENDED ) {
                     playVideo();
                 }

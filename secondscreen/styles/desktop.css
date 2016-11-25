@@ -175,11 +175,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   padding-bottom: 30px;
   line-height: 1.2;
 }
-.demo #connected p {
+.demo #connected {
   float: left;
   margin-right: -100%;
   width: 65.67%;
   margin-left: 17.17%;
+  padding-top: 50px;
   float: none;
   clear: both;
   text-align: center;

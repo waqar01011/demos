@@ -136,16 +136,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
   overflow: hidden;
   *zoom: 1;
-  padding-top: 20px;
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+.demo #loading {
+  display: block;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.01em;
 }
 .demo #disconnected {
+  display: none;
   text-align: center;
 }
 .demo #disconnected p {
   float: left;
   margin-right: -100%;
-  width: 48.5%;
-  margin-left: 25.75%;
+  width: 82.83%;
+  margin-left: 8.58%;
   float: none;
   clear: both;
   text-align: center;
@@ -155,6 +165,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   letter-spacing: 0.01em;
   line-height: 1.2;
   padding-bottom: 20px;
+}
+.demo #disconnected #warning {
+  display: none;
+  padding-bottom: 30px;
+}
+.demo #disconnected #warning span {
+  display: block;
+  color: red;
+  font-size: 20px;
+  font-weight: 700;
 }
 .demo #disconnected input {
   width: 160px;
@@ -191,11 +211,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: black;
   color: white;
 }
+.demo #connected {
+  display: none;
+}
 .demo #connected h2 {
   float: left;
   margin-right: -100%;
-  width: 65.67%;
-  margin-left: 17.17%;
+  width: 82.83%;
+  margin-left: 8.58%;
   float: none;
   clear: both;
   text-align: center;
