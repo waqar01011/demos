@@ -51,6 +51,7 @@ SecondScreenDemo.prototype.addEventListeners = function() {
  */   
 SecondScreenDemo.prototype.onDisconnect = function() {
     console.log('disconnected');
+    this.isConnected = false;
     this.elDisconnected.style.display = "block";
     this.elConnected.style.display = "none";
 }
