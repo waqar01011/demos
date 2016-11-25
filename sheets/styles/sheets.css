@@ -131,8 +131,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   }
 }
 .demoContainer {
-  padding-top: 50px;
-  padding-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  width: 100%;
+  padding: 0 3%;
+  box-sizing: border-box;
+  overflow: hidden;
+  *zoom: 1;
 }
 .demoContainer h2 {
   float: left;
