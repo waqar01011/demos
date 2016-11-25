@@ -1,0 +1,71 @@
+.description {
+    
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    z-index: 9001;
+    line-height: 80px;       
+    background: white;
+
+    p {
+        margin: 0;
+        padding: 0 0 0 20px;
+        font-family: $fontMain;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        font-size: 16px;
+        color: black;
+        line-height: 80px;       
+        width: auto;
+        display: inline-block;
+    }
+
+    .links {
+        float: right;
+        display: inline-block;
+        margin-right: 15px;
+
+        a {
+            display: inline-block;
+            margin: 18px 5px 0 5px;
+            border: 2px solid black;
+            padding: 0 20px;
+
+            font-family: $fontMain;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+            color: black;
+
+            line-height: 40px; 
+            height: 40px;
+            text-decoration: none; 
+        }
+    }
+
+    a:hover {
+        border-color: black;
+        background: black;
+        color: white;
+    }
+
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .description {
+        text-align: center;
+
+        p {
+            display: none;
+        }
+        .links {
+            float: none;
+            margin: 0;
+        }
+    }
+}

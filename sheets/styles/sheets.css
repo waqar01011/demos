@@ -130,100 +130,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     margin: 0;
   }
 }
-.demo {
-  width: 100%;
-  padding: 0 3%;
-  box-sizing: border-box;
-  overflow: hidden;
-  *zoom: 1;
-  padding-top: 40px;
+.demoContainer {
+  padding-top: 50px;
   padding-bottom: 100px;
 }
-.demo #loading {
-  display: block;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  letter-spacing: 0.01em;
-}
-.demo #disconnected {
-  display: none;
-  text-align: center;
-}
-.demo #disconnected p {
+.demoContainer h2 {
   float: left;
   margin-right: -100%;
-  width: 82.83%;
-  margin-left: 8.58%;
+  width: 65.67%;
+  margin-left: 17.17%;
   float: none;
   clear: both;
   text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
-  padding-bottom: 20px;
-}
-.demo #disconnected #warning {
-  display: none;
-  padding-bottom: 30px;
-}
-.demo #disconnected #warning span {
-  display: block;
-  color: red;
-  font-size: 20px;
-  font-weight: 700;
-}
-.demo #disconnected input {
-  width: 160px;
-  height: 50px;
-  background: white;
-  border: 1px solid black;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-size: 34px;
-  letter-spacing: 0.01em;
-  line-height: 50px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.demo #disconnected input:focus {
-  outline: none;
-}
-.demo #disconnected a {
-  display: inline-block;
-  text-align: center;
-  margin: 18px 5px 0 5px;
-  border: 2px solid black;
-  padding: 0 20px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  font-size: 16px;
-  color: black;
-  line-height: 40px;
-  height: 40px;
-  text-decoration: none;
-}
-.demo #disconnected a:hover {
-  border-color: black;
-  background: black;
-  color: white;
-}
-.demo #connected {
-  display: none;
-}
-.demo #connected h2 {
-  float: left;
-  margin-right: -100%;
-  width: 82.83%;
-  margin-left: 8.58%;
-  float: none;
-  clear: both;
-  text-align: center;
-  color: black;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 34px;
@@ -231,9 +149,28 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   padding-bottom: 30px;
   line-height: 1.2;
 }
-.demo #connected #time {
-  display: block;
-  text-align: center;
+.demoContainer h3 {
+  float: left;
+  margin-right: -100%;
+  width: 48.5%;
+  margin-left: 25.75%;
+  float: none;
+  clear: both;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+.demoContainer p {
+  float: left;
+  margin-right: -100%;
+  width: 48.5%;
+  margin-left: 25.75%;
+  float: none;
+  clear: both;
+  text-align: left;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -241,26 +178,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   line-height: 1.2;
   padding-bottom: 20px;
 }
-.demo #connected .controls {
-  text-align: center;
-}
-.demo #connected .controls a {
-  display: inline-block;
-  text-align: center;
-  margin: 18px 5px 0 5px;
-  border: 2px solid black;
-  padding: 0 20px;
-  font-family: "Roboto", sans-serif;
+.demoContainer a {
   font-weight: 500;
-  letter-spacing: 0.01em;
-  font-size: 16px;
-  color: black;
-  line-height: 40px;
-  height: 40px;
+  color: #0068B7;
   text-decoration: none;
 }
-.demo #connected .controls a:hover, .demo #connected .controls a.active {
-  border-color: black;
-  background: black;
-  color: white;
+.demoContainer a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+  .demoContainer h2, .demoContainer h3, .demoContainer p {
+    float: left;
+    margin-right: -100%;
+    width: 100%;
+    margin-left: 0%;
+  }
 }
