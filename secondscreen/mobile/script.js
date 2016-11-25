@@ -99,7 +99,7 @@ Demo.prototype.onDisconnect = function() {
  */   
 Demo.prototype.onHandshakeRequest = function(e) {
     e.preventDefault();
-    var id = this.elInputID.value;
+    var id = this.elInputID.value.toUpperCase();
     if (id.trim() == "") {
         alert("Please enter the id of the device you're trying to connect to.");
         return;
