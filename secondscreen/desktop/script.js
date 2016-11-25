@@ -26,8 +26,8 @@ SecondScreenDemo.prototype.connect = function() {
         this.addEventListeners();
     }.bind(this);
 
-    socketIo.onerror = function(){
-        this.onConnectError();
+    socketIo.onerror = function(e){
+        console.log(e);
     }.bind(this);
 
     socketIo.src = this.server  + "/socket.io/socket.io.js";
