@@ -138,6 +138,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
   text-align: center;
   padding-top: 50px;
+  padding-bottom: 150px;
 }
 .demo iframe {
   max-width: 100%;
