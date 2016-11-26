@@ -6,13 +6,14 @@
 
 
 .demoContainer {
-	margin-top: 50px;
+	margin-top: 30px;
 	margin-bottom: 100px;
 
 	@include container();
 
 	h2 {
 
+		padding-top: 30px;
 		@include column(8,2);
 		float: none;
 		clear: both;

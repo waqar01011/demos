@@ -121,10 +121,10 @@ function VisualizationManager() {
         scene.add( container );
 
         window.addEventListener('resize', resizeCanvas, false);
-        $(window).on('mousemove', onmove);
-        window.addEventListener( 'touchstart', startouch, false );
-        window.addEventListener( 'touchend', endtouch, false );
-        window.addEventListener( 'touchmove', touch, false );
+        $(document).on('mousemove', onmove);
+        document.addEventListener( 'touchstart', startouch, false );
+        document.addEventListener( 'touchend', endtouch, false );
+        document.addEventListener( 'touchmove', touch, false );
 
         resizeCanvas();
     }
@@ -160,8 +160,8 @@ function VisualizationManager() {
 
     var onmove = function(e){
         if (touching == false){
-            dimensions.mousePercX = event.pageX/window.innerWidth;
-            dimensions.mousePercY = event.pageY/window.innerHeight;
+            dimensions.mousePercX = e.pageX/window.innerWidth;
+            dimensions.mousePercY = e.pageY/window.innerHeight;
         }
     }
 

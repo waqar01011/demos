@@ -131,7 +131,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   }
 }
 .demoContainer {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 100px;
   width: 100%;
   padding: 0 5%;
@@ -140,6 +140,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
 }
 .demoContainer h2 {
+  padding-top: 30px;
   float: left;
   margin-right: -100%;
   width: 65.67%;

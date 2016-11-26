@@ -27,6 +27,10 @@ $(document).ready(function() {
 		if (!Detector.webgl){
 			alert("Dependency not met: WebGL");
 		}
+
+		if (!Detector.is_chrome || !Detector.is_firefox){
+			alert("Browser requirement: This demo requires Chrome or Firefox.");
+		}
 	}
 });
 
