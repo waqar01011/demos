@@ -29,7 +29,7 @@ $(document).ready(function() {
 		}
 
 		if (!Detector.is_chrome || !Detector.is_firefox){
-			alert("Browser requirement: This demo requires Chrome or Firefox.");
+			alert("Dependency not met: This demo requires Chrome or Firefox. (detected: " + navigator.userAgent + ")");
 		}
 	}
 });

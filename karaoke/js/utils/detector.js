@@ -2,7 +2,7 @@
 window.AudioCtx = (function() { return window.AudioContext || window.mozAudioContext || window.webkitAudioContext || window.msAudioContext || window.oAudioContext; })();
 
 var Detector = {
-	is_chrome: navigator.userAgent.indexOf('Chrome') > -1,
+	is_chrome: navigator.userAgent.indexOf('Chrome') > -1 || (navigator.userAgent.indexOf('Apple') > -1 && navigator.userAgent.indexOf('CriOS') > -1),
 	is_firefox: navigator.userAgent.indexOf('Firefox') > -1,
 	canvas: !! window.CanvasRenderingContext2D,
 	webgl: ( function () { try { return !! window.WebGLRenderingContext && !! document.createElement( 'canvas' ).getContext( 'experimental-webgl' ); } catch( e ) { return false; } } )(),
