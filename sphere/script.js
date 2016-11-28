@@ -286,6 +286,7 @@ Connection.prototype.draw = function() {
  */
 function onDocumentMouseMove(e) {
     e.preventDefault();
+
     if (e.touches && e.touches.length > 0) {
         mouseX = e.touches[0].clientX - windowHalfX;
         mouseY = e.touches[0].clientY - windowHalfY;
@@ -300,7 +301,7 @@ function onDocumentMouseMove(e) {
  * @param {Object} e The event object.
  */
 function onDragStart(e) {
-    e.preventDefault();
+
     isDragging = true;
 
     if (e.touches && e.touches.length > 0) {
@@ -321,7 +322,7 @@ function onDragStart(e) {
  * @param {Object} e The event object.
  */
 function onDragEnd(e) {
-    e.preventDefault();
+
     isDragging = false;
     var curPosX = mouseX;
     var curPosY = mouseY;

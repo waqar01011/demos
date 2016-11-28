@@ -485,7 +485,7 @@ function onDocumentMouseMove(e) {
  * @param {Object} e The event object.
  */
 function onDragStart(e) {
-    e.preventDefault();
+
     isDragging = true;
     
     if (e.touches && e.touches.length > 0) {
@@ -504,7 +504,7 @@ function onDragStart(e) {
  * @param {Object} e The event object.
  */
 function onDragEnd(e) {
-    e.preventDefault();
+
     isDragging = false;               
 }
 
